@@ -1,13 +1,12 @@
 'use strict'
 
 // core
-const querystring = require('querystring')
+// const querystring = require('querystring')
 
-// npm
-const got = require('got')
+// self
+const utils = require('./lib/utils')
+
 const marked = require('marked')
-const pick = require('lodash.pick')
-const debug = require('debug')('vault-demo')
 const PouchDB = require('pouchdb-core')
   .plugin(require('pouchdb-adapter-memory'))
   .plugin(require('pouchdb-adapter-http'))
@@ -38,45 +37,18 @@ const frontPage = (res) => db.find({ selector: { type: 'boot' } })
     .catch((e) => { return { lastBootTimes: x } })
   )
 
-const shared = ((n) => {
-  const y = new Uint32Array(n)
-  y.forEach((v, k, m) => m[k] = Math.floor(Math.random() * Math.pow(2, 32)))
-  return new Buffer(y.buffer).toString('base64').slice(0, Math.floor(Math.random() * 5) - 6)
-})(5)
-
-const post = pick(process.env, ['DEPLOYMENT_ID', 'AUTH_TOKEN', 'NOW_URL'])
-// const post = process.env
-post.shared = shared
-
 let secrets
 
-debug('tickling...')
-got('https://btcart.com/vault-server/', {
-  json: true,
-  body: post,
-  timeout: 15000,
-  retries: 10
-})
+utils()
   .then((r) => {
-    debug('so...', new Date())
-    if (r && r.body && r.body.shared === shared) {
-      debug('yup', new Date())
-      return r.body.secrets
-    }
-    debug('almost', new Date(), r.body)
-  })
-  .then((r) => {
-    if (!r || !r.dbSync) { return }
-    secrets = r
-    db.sync(secrets.dbSync, { live: true, retry: true })
+    if (!r || !r.dbSync) { return false }
+    db.sync(r.dbSync, { live: true, retry: true })
     db.post({
       type: 'boot',
       created_at: new Date().toISOString(),
       host: process.env.NOW_URL
     })
-  })
-  .catch((e) => {
-    debug('nup', new Date(), e)
+    secrets = r
   })
 
 export default (req, res) => secrets ? frontPage(res) : notReady()
