@@ -4,7 +4,7 @@
 // const querystring = require('querystring')
 
 // self
-const utils = require('./lib/utils')
+const utils = require('now-vault-client')
 
 const marked = require('marked')
 const PouchDB = require('pouchdb-core')
