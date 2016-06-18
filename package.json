@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
+  "repository": "millette/vault-demo",
   "engines": {
     "node": ">=4"
   },
@@ -10,19 +11,24 @@
     "start": "forever node_modules/.bin/micro index"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Robin Millette",
+    "email": "robin@millette.info",
+    "url": "http://robin.millette.info"
+  },
+  "license": "AGPL-3.0",
   "dependencies": {
     "debug": "^2.2.0",
     "forever": "^0.15.2",
     "got": "^6.3.0",
     "lodash.pick": "^4.2.1",
-    "marked": "^0.3.5",
     "micro": "^4.1.1",
     "now-vault-client": "0.0.2",
-    "pouchdb-adapter-http": "^5.4.2",
-    "pouchdb-adapter-memory": "^5.4.2",
-    "pouchdb-core": "^5.4.2",
-    "pouchdb-find": "^0.10.0",
-    "pouchdb-replication": "^5.4.2"
+    "pouchdb-adapter-http": "^5.4.4",
+    "pouchdb-adapter-memory": "^5.4.4",
+    "pouchdb-core": "^5.4.4",
+    "pouchdb-find": "^0.10.2",
+    "pouchdb-replication": "^5.4.4",
+    "showdown": "^1.4.1"
   }
 }

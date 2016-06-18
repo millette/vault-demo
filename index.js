@@ -3,10 +3,9 @@
 // core
 // const querystring = require('querystring')
 
-// self
+// npm
 const utils = require('now-vault-client')
-
-const marked = require('marked')
+const showdown = require('showdown')
 const PouchDB = require('pouchdb-core')
   .plugin(require('pouchdb-adapter-memory'))
   .plugin(require('pouchdb-adapter-http'))
@@ -14,6 +13,10 @@ const PouchDB = require('pouchdb-core')
   .plugin(require('pouchdb-find'))
 
 const db = new PouchDB('ram')
+
+const converter = new showdown.Converter()
+
+const markdown = (txt) => converter.makeHtml(text)
 
 const notReady = () => 'Should be ready any second now...'
 
@@ -25,7 +28,7 @@ const frontPage = (res) => db.find({ selector: { type: 'boot' } })
     .then((y) => {
       const txt = `<doctype html><html><head><meta charset='utf8'></head>
         <body>
-        ${marked(y.markdown)}
+        ${markdown(y.markdown)}
         <h3>Last boots</h3>
         <ol>
           <li>${x.join('</li><li>')}</li>
