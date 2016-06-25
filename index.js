@@ -1,8 +1,5 @@
 'use strict'
 
-// core
-// const querystring = require('querystring')
-
 // npm
 const utils = require('now-vault-client')
 const showdown = require('showdown')
