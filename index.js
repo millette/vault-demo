@@ -2,6 +2,7 @@
 
 // npm
 const utils = require('now-vault-client')
+const updateNotifier = require('update-notifier')
 const showdown = require('showdown')
 const PouchDB = require('pouchdb-core')
   .plugin(require('pouchdb-adapter-memory'))
@@ -38,6 +39,8 @@ const frontPage = (res) => db.find({ selector: { type: 'boot' } })
   )
 
 let secrets
+
+updateNotifier({ pkg: require('./package.json') }).notify()
 
 utils()
   .then((r) => {

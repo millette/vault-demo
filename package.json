@@ -1,7 +1,7 @@
 {
   "name": "vault-demo",
   "version": "0.1.2",
-  "description": "",
+  "description": "Now Vault Demo",
   "main": "index.js",
   "repository": "millette/vault-demo",
   "engines": {
@@ -29,6 +29,7 @@
     "pouchdb-core": "^5.4.4",
     "pouchdb-find": "^0.10.2",
     "pouchdb-replication": "^5.4.4",
-    "showdown": "^1.4.2"
+    "showdown": "^1.4.2",
+    "update-notifier": "^1.0.2"
   }
 }
