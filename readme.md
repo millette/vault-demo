@@ -18,3 +18,4 @@ with any value or by using the --no-update-notifier flag on a per run basis.
 
 [vault-client]: <https://github.com/millette/vault-client>
 [now-vault]: <https://github.com/millette/now-vault>
+[update-notifier]: <https://github.com/yeoman/update-notifier>
